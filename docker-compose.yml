@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: docker-postgres-1
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: notificaciones
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:7.2-alpine
+    container_name: docker-redis-1
+    ports:
+      - "6379:6379"
+
+  # ... tus otros servicios (kafka, zookeeper) bajo "services:"

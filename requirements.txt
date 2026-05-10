@@ -1,0 +1,5 @@
+pandas
+great-expectations
+kafka-python
+redis
+psycopg2-binary
