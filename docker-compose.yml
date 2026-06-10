@@ -1,20 +1,61 @@
-version: '3.8'
+version: "3.9"
 
 services:
-  postgres:
-    image: postgres:15-alpine
-    container_name: docker-postgres-1
+
+  # ── Base de datos PostgreSQL ────────────────────────────────────────────────
+  db:
+    image: postgres:16-alpine
+    container_name: motor_db
+    restart: unless-stopped
     environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin123
-      POSTGRES_DB: notificaciones
+      POSTGRES_DB:       red_social
+      POSTGRES_USER:     pipeline_user
+      POSTGRES_PASSWORD: pipeline_pass
     ports:
       - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+      - ./src/carga/init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pipeline_user -d red_social"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
-  redis:
-    image: redis:7.2-alpine
-    container_name: docker-redis-1
+  # ── Servicio del modelo IA (FastAPI) ────────────────────────────────────────
+  ia_service:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: motor_ia_service
+    restart: unless-stopped
+    environment:
+      IA_SERVICE_PORT: "8000"
     ports:
-      - "6379:6379"
+      - "8000:8000"
+    volumes:
+      - ./src/ia:/app/src/ia     # Monta el pkl entrenado en notebooks/
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
 
-  # ... tus otros servicios (kafka, zookeeper) bajo "services:"
+  # ── Jupyter Lab para ejecutar los notebooks ─────────────────────────────────
+  notebook:
+    image: jupyter/scipy-notebook:python-3.11
+    container_name: motor_notebook
+    ports:
+      - "8888:8888"
+    volumes:
+      - .:/home/jovyan/work
+    environment:
+      JUPYTER_ENABLE_LAB: "yes"
+      GRANT_SUDO: "yes"
+    command: start-notebook.sh --NotebookApp.token='' --NotebookApp.password=''
+
+volumes:
+  pg_data:
