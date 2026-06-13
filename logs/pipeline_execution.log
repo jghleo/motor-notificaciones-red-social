@@ -1,0 +1,63 @@
+============================================================
+LOG DE EJECUCIÓN — MOTOR NOTIFICACIONES IA
+============================================================
+Timestamp UTC   : 2026-06-13T00:38:25.661222
+Entorno         : Windows 11
+Python          : 3.14.5
+Fuente de datos : real
+Registros totales: 15
+Train/Test split: 80/20 estratificado
+────────────────────────────────────────────────────────────
+MÉTRICAS MODELO (Random Forest n=200, max_depth=12):
+  Accuracy  : 0.6667
+  Precision : 0.6667
+  Recall    : 1.0000
+  F1-Score  : 0.8000
+  ROC-AUC   : 1.0000
+  Gini      : 1.0000
+────────────────────────────────────────────────────────────
+Artefacto modelo: src/ia/modelo_notificaciones_rf.pkl
+API endpoint    : http://localhost:8000/predict
+============================================================
+============================================================
+LOG DE EJECUCIÓN — MOTOR NOTIFICACIONES IA
+============================================================
+Timestamp UTC   : 2026-06-13T00:39:17.539738
+Entorno         : Windows 11
+Python          : 3.14.5
+Fuente de datos : real
+Registros totales: 15
+Train/Test split: 80/20 estratificado
+────────────────────────────────────────────────────────────
+MÉTRICAS MODELO (Random Forest n=200, max_depth=12):
+  Accuracy  : 0.6667
+  Precision : 0.6667
+  Recall    : 1.0000
+  F1-Score  : 0.8000
+  ROC-AUC   : 1.0000
+  Gini      : 1.0000
+────────────────────────────────────────────────────────────
+Artefacto modelo: src/ia/modelo_notificaciones_rf.pkl
+API endpoint    : http://localhost:8000/predict
+============================================================
+============================================================
+LOG DE EJECUCIÓN — MOTOR NOTIFICACIONES IA
+============================================================
+Timestamp UTC   : 2026-06-13T01:34:41.986658
+Entorno         : Windows 11
+Python          : 3.14.5
+Fuente de datos : real
+Registros totales: 15
+Train/Test split: 80/20 estratificado
+────────────────────────────────────────────────────────────
+MÉTRICAS MODELO (Random Forest n=200, max_depth=12):
+  Accuracy  : 0.6667
+  Precision : 0.6667
+  Recall    : 1.0000
+  F1-Score  : 0.8000
+  ROC-AUC   : 1.0000
+  Gini      : 1.0000
+────────────────────────────────────────────────────────────
+Artefacto modelo: src/ia/modelo_notificaciones_rf.pkl
+API endpoint    : http://localhost:8001/predict
+============================================================
