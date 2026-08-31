@@ -1,0 +1,17 @@
+name: Flujo Recurrente - Tareas Programadas
+
+on:
+  schedule:
+    # Se ejecuta automáticamente todos los días a las 08:00 UTC
+    - cron: '0 8 * * *'
+  workflow_dispatch: # Permite dispararlo manualmente desde la web cuando quieras
+
+jobs:
+  procesar-notificaciones:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      - name: Ejecutar tarea recurrente
+        run: echo "Procesando tareas programadas de notificaciones..."
