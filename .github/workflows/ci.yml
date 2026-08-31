@@ -1,0 +1,17 @@
+name: Integracion Continua
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  prueba:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonar repositorio
+        uses: actions/checkout@v4
+
+      - name: Probar ejecucion
+        run: echo "¡GitHub Actions se ejecuto correctamente desde el navegador!"
